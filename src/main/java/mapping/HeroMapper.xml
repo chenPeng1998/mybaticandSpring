@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="dao.HeroMapper" >
+  <resultMap id="BaseResultMap" type="pojo.Hero" >
+    <result column="id" property="id" jdbcType="INTEGER" />
+    <result column="user" property="user" jdbcType="VARCHAR" />
+  </resultMap>
+  <insert id="insert" parameterType="pojo.Hero" >
+    insert into t_hero (id, user)
+    values (#{id,jdbcType=INTEGER}, #{user,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="pojo.Hero" >
+    insert into t_hero
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="user != null" >
+        user,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="user != null" >
+        #{user,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>
